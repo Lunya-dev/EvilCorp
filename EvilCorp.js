@@ -16,8 +16,8 @@
     // The script is case-insensitive and matches these as whole words.
     const companyNames = [
         "21st Century Fox",
+        "Activision Blizzard",
         "Activision",
-        "EvilCorp Blizzard",
         "Amazon.com",
         "AmerisourceBergen",
         "Anthem Blue Cross",
