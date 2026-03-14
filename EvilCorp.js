@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name        Accurate Company Names
-// @version    	1.0
+// @version    	1.01
 // @description Replaces names of malicious corporations/organizations etc. with "EvilCorp" from Mr. Robot.
 // @author      Lunya
 // @match       *://*/*
@@ -81,8 +81,8 @@
         "ExxonMobil",
         "Facebook",
         "Fitbit LLC",
-        "Fitbit",
         "Fitbit, Inc",
+        "Fitbit",
         "Fiverr",
         "Fox Corporation",
         "Fox News",
@@ -100,6 +100,7 @@
         "HP Inc",
         "HP Labs",
         "HP Omen",
+        "Happy Bar & Grill",
         "HelloFresh",
         "Hewlett-Packard",
         "Hon Hai Precision Industry",
