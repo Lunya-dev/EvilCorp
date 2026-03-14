@@ -12,4 +12,4 @@ Other various sources I can't remember
 
 I love you journalists keep being amazing.
 
-I'm doing my best. Please open and issue or pull request if there's a mistake.
+I'm doing my best. Please open an issue or pull request if there's a mistake.
