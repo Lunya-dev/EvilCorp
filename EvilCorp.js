@@ -1,29 +1,31 @@
 // ==UserScript==
 // @name        Accurate Company Names
-// @version     0.5
-// @description Replace mentions of malicious companies with "EvilCorp" from Mr. Robot.
+// @version    	1.0
+// @description Replaces names of malicious corporations/organizations etc. with "EvilCorp" from Mr. Robot.
 // @author      Lunya
 // @match       *://*/*
 // @grant       none
 // @run-at      document-body
 // ==/UserScript==
 
-(function() {
+(function () {
     'use strict';
 
     // --- Configuration ---
-    // A single, alphabetized list of company names.
-    // The script is case-insensitive and matches these as whole words.
     const companyNames = [
         "21st Century Fox",
-        "Activision Blizzard",
-        "Activision",
-        "Amazon.com",
-        "AmerisourceBergen",
-        "Anthem Blue Cross",
-        "Apple Inc",
+        "AMD",
         "ASUS",
         "AT&T",
+        "Activision Blizzard",
+        "Activision",
+        "Advanced Micro Devices, Inc.",
+        "Amazon.com",
+        "AmerisourceBergen",
+        "Amway",
+        "Anthem Blue Cross",
+        "Apple Inc",
+        "BP Amoco",
         "Bandai Namco",
         "Bank of America",
         "Bank of China",
@@ -35,9 +37,11 @@
         "Blue Cross Blue Shield Association",
         "Blue Shield",
         "Boeing",
-        "BP Amoco",
         "British American Tobacco",
+        "British Petroleum",
         "ByteDance",
+        "CNN",
+        "CVS Health",
         "Cable News Network",
         "Cadbury Schweppes",
         "Cadbury",
@@ -57,31 +61,35 @@
         "Citi",
         "Citigroup",
         "Clif Bar",
-        "CNN",
         "Coca-Cola",
         "Comcast",
         "Crunchyroll",
         "Curse LLC",
         "CurseForge",
-        "CVS Health",
         "Dell",
         "DeviantArt",
         "Discord Inc",
         "Disney",
-        "eBay",
-        "Edvard König Water Blocks",
+        "Dow Chemical Company",
+        "Dow Inc",
         "EKWB",
+        "Edvard König Water Blocks",
         "Electronic Arts",
         "Elevance Health",
         "Enel",
         "Exxon Mobil",
         "ExxonMobil",
         "Facebook",
+        "Fitbit LLC",
+        "Fitbit",
+        "Fitbit, Inc",
         "Fiverr",
         "Fox Corporation",
         "Fox News",
         "Foxconn",
+        "Futrehome",
         "Gen Digital",
+        "General Motors",
         "General Motors",
         "Glencore",
         "Goldman Sachs",
@@ -89,35 +97,40 @@
         "Greenpeace International",
         "H&M",
         "HDMI",
+        "HP Inc",
+        "HP Labs",
+        "HP Omen",
         "HelloFresh",
         "Hewlett-Packard",
         "Hon Hai Precision Industry",
+        "HyperX",
         "Imperial Brands",
         "Industrial and Commercial Bank of China",
         "Instagram",
         "Intel",
-        "iTunes",
-        "Japan Tobacco International",
         "JPMorgan Chase",
+        "Japan Tobacco International",
         "Kalshi",
         "Kellanova",
         "Kellogg",
         "LinkedIn",
-        "McAfee",
         "McDonald's",
         "MegaSpeed",
         "Meta Platforms",
-        "Microsoft",
+        "Micron Technology",
         "Mondelez International",
         "Monsanto",
-        "Nabisco",
-        "Nestlé",
-        "Netflix",
-        "New York Post",
-        "NortonLifeLock",
         "NVIDIA",
         "NY Post",
         "NZXT",
+        "Nabisco",
+        "Nestlé",
+        "Netflix",
+        "Neurable",
+        "New York Post",
+        "Newsmax",
+        "Nintendo",
+        "NortonLifeLock",
         "OOONA",
         "OpenAI",
         "Overwolf",
@@ -142,6 +155,9 @@
         "Siemens",
         "Snap Inc",
         "Snapchat",
+        "SoftKey International",
+        "SoftKey Software Products",
+        "SoftKey",
         "Sony",
         "Starbucks",
         "Symantec Corporation",
@@ -151,6 +167,7 @@
         "The Campbell's Company",
         "The Central Bottling Company",
         "The Cigna Group",
+        "The New York Times",
         "The Procter & Gamble Company (P&G)",
         "The Trump Organization",
         "The Washington Post",
@@ -168,9 +185,11 @@
         "UnitedHealth Group",
         "UnitedHealthcare",
         "Verizon",
+        "Victus",
+        "VitalSource",
         "Vitol",
-        "Walmart",
         "WaPo",
+        "Walmart",
         "Wells Fargo",
         "WhatsApp",
         "Wikia",
@@ -179,35 +198,33 @@
         "Xfinity",
         "YouTube",
         "Zoom Communications",
-//      "Alphabet",
-//      "Amazon",
-//      "Apple",
-//      "BP",
-//      "Meta",
-//      "Shell",
+        "eBay",
+        "iTunes",
     ];
 
-    // The replacement text
+    // Default replacement for all companies
     const replacement = "EvilCorp";
 
+    // Special replacement for Microsoft
+    const specialReplacement = "Microslop";
+
     /**
-     * Escapes special characters in a string for use in a regular expression.
-     * @param {string} str The string to escape.
-     * @returns {string} The escaped string.
+     * Escapes special characters for regex
      */
     function escapeRegExp(str) {
         return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     }
 
-    // Create a single, case-insensitive, and safe regular expression.
+    // Main regex for all companies (improved boundaries)
     const escapedCompanyNames = companyNames.map(escapeRegExp);
-    const companyRegex = new RegExp(`\\b(${escapedCompanyNames.join('|')})\\b`, 'gi');
+    const companyRegex = new RegExp(`(?<!\\w)(${escapedCompanyNames.join('|')})(?!\\w)`, 'giu');
 
-    // Walk through text nodes and performs the replacement.
+    // Special regex for Microsoft → Microslop
+    const specialRegex = new RegExp(`(?<!\\w)Microsoft(?!\\w)`, 'giu');
+
+    // Text replacement function
     const replaceTextInNode = (contextNode) => {
-        if (!contextNode || contextNode.nodeType !== Node.ELEMENT_NODE) {
-            return;
-        }
+        if (!contextNode || contextNode.nodeType !== Node.ELEMENT_NODE) return;
 
         const walker = document.createTreeWalker(
             contextNode,
@@ -226,29 +243,35 @@
             const parent = node.parentElement;
             if (parent) {
                 const parentTag = parent.tagName.toLowerCase();
-                // Skip nodes in script/style tags or editable fields
                 if (parentTag === 'script' || parentTag === 'style' || parent.isContentEditable) {
                     return;
                 }
             }
 
-            const originalText = node.nodeValue;
-            if (companyRegex.test(originalText)) {
-                companyRegex.lastIndex = 0; // Reset regex from .test()
-                const newText = originalText.replace(companyRegex, replacement);
-                if (originalText !== newText) {
-                    node.nodeValue = newText;
-                }
+            let text = node.nodeValue;
+            const originalText = text;
+
+            // 1. Apply special Microsoft replacement first
+            if (specialRegex.test(text)) {
+                specialRegex.lastIndex = 0;
+                text = text.replace(specialRegex, specialReplacement);
+            }
+
+            // 2. Apply general company replacement
+            if (companyRegex.test(text)) {
+                companyRegex.lastIndex = 0;
+                text = text.replace(companyRegex, replacement);
+            }
+
+            if (originalText !== text) {
+                node.nodeValue = text;
             }
         });
     };
 
     // --- Execution ---
-
-    // Initial replacement on page load
     replaceTextInNode(document.body);
 
-    // Set up a MutationObserver to handle dynamically loaded content.
     const observer = new MutationObserver((mutations) => {
         mutations.forEach((mutation) => {
             mutation.addedNodes.forEach((newNode) => {
@@ -259,7 +282,6 @@
         });
     });
 
-    // Start observing the document.
     observer.observe(document.body, {
         childList: true,
         subtree: true
