@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name        Accurate Company Names
-// @version    	1.01
+// @version    	1.1
 // @description Replaces names of malicious corporations/organizations etc. with "EvilCorp" from Mr. Robot.
 // @author      Lunya
 // @match       *://*/*
@@ -79,6 +79,7 @@
         "Enel",
         "Exxon Mobil",
         "ExxonMobil",
+        "FIDE",
         "Facebook",
         "Fitbit LLC",
         "Fitbit",
@@ -109,6 +110,7 @@
         "Industrial and Commercial Bank of China",
         "Instagram",
         "Intel",
+        "International Chess Federation",
         "JPMorgan Chase",
         "Japan Tobacco International",
         "Kalshi",
@@ -196,6 +198,7 @@
         "WhatsApp",
         "Wikia",
         "Wix.com",
+        "World Chess Federation",
         "X Corp",
         "Xfinity",
         "YouTube",
