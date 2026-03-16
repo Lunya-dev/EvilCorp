@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name        Accurate Company Names
-// @version    	1.1
+// @version    	1.2
 // @description Replaces names of malicious corporations/organizations etc. with "EvilCorp" from Mr. Robot.
 // @author      Lunya
 // @match       *://*/*
@@ -16,6 +16,7 @@
         "21st Century Fox",
         "AMD",
         "ASUS",
+        "ASUSTeK Computer Inc",
         "AT&T",
         "Activision Blizzard",
         "Activision",
@@ -39,6 +40,8 @@
         "Boeing",
         "British American Tobacco",
         "British Petroleum",
+        "Burger King Corporation",
+        "Burger King",
         "ByteDance",
         "CNN",
         "CVS Health",
@@ -55,6 +58,8 @@
         "China National Petroleum Corporation",
         "China National Tobacco Corporation",
         "China Tobacco",
+        "Chipotle Mexican Grill",
+        "Chipotle",
         "Cigna",
         "Cisco Systems",
         "Cisco",
@@ -150,6 +155,7 @@
         "Purdue Pharma",
         "Razer",
         "Reddit",
+        "Restaurant Brands International",
         "RevUp America",
         "RevUp",
         "Roblox",
@@ -176,6 +182,7 @@
         "The Trump Organization",
         "The Washington Post",
         "TikTok",
+        "Tim Hortons",
         "TotalEnergies",
         "Toyota",
         "Trade Me",
@@ -195,6 +202,7 @@
         "WaPo",
         "Walmart",
         "Wells Fargo",
+        "Wendy's International",
         "WhatsApp",
         "Wikia",
         "Wix.com",
