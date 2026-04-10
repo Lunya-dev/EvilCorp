@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name        Accurate Company Names
-// @version    	1.3
+// @version    	1.4
 // @description Replaces names of malicious corporations/organizations etc. with "EvilCorp" from Mr. Robot.
 // @author      Lunya
 // @match       *://*/*
@@ -21,9 +21,11 @@
         "Activision Blizzard",
         "Activision",
         "Advanced Micro Devices, Inc.",
+        "Alliance Defending Freedom",
         "Amazon.com",
         "AmerisourceBergen",
         "Amway",
+        "Anduril Industries",
         "Anthem Blue Cross",
         "Apple Inc",
         "BP Amoco",
@@ -75,14 +77,17 @@
         "Dell",
         "DeviantArt",
         "Discord Inc",
+        "Discovery Institute",
         "Disney",
         "Dow Chemical Company",
         "Dow Inc",
         "EKWB",
+        "Eagle Forum",
         "Edvard König Water Blocks",
         "Electronic Arts",
         "Elevance Health",
         "Enel",
+        "Epic Games",
         "Exxon Mobil",
         "ExxonMobil",
         "FIDE",
@@ -122,6 +127,7 @@
         "Kalshi",
         "Kellanova",
         "Kellogg",
+        "Krafton",
         "LinkedIn",
         "McDonald's",
         "MegaSpeed",
