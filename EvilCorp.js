@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name        Accurate Company Names
-// @version    	1.4
+// @version    	1.5
 // @description Replaces names of malicious corporations/organizations etc. with "EvilCorp" from Mr. Robot.
 // @author      Lunya
 // @match       *://*/*
@@ -16,11 +16,11 @@
         "21st Century Fox",
         "AMD",
         "ASUS",
-        "ASUSTeK Computer Inc",
+        "ASUSTeK Computer",
         "AT&T",
         "Activision Blizzard",
         "Activision",
-        "Advanced Micro Devices, Inc.",
+        "Advanced Micro Devices",
         "Alliance Defending Freedom",
         "Amazon.com",
         "AmerisourceBergen",
@@ -92,16 +92,13 @@
         "ExxonMobil",
         "FIDE",
         "Facebook",
-        "Fitbit LLC",
         "Fitbit",
-        "Fitbit, Inc",
         "Fiverr",
         "Fox Corporation",
         "Fox News",
         "Foxconn",
         "Futrehome",
         "Gen Digital",
-        "General Motors",
         "General Motors",
         "Glencore",
         "Goldman Sachs",
@@ -151,7 +148,6 @@
         "OpenAI",
         "Overwolf",
         "Palantir",
-        "Patreon Inc",
         "Patreon",
         "PayPal",
         "Pegatron",
