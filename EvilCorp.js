@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name        Accurate Company Names
-// @version    	1.5
+// @version    	1.6
 // @description Replaces names of malicious corporations/organizations etc. with "EvilCorp" from Mr. Robot.
 // @author      Lunya
 // @match       *://*/*
@@ -33,6 +33,7 @@
         "Bank of America",
         "Bank of China",
         "Bayer",
+        "Beira's Place",
         "Best Buy",
         "BlackRock",
         "Bloomberg L.P",
