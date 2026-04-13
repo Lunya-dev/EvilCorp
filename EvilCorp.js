@@ -239,7 +239,7 @@
         "iTunes",
     ];
 
-    // Default replacement for all companies
+    // Default replacement
     const replacement = "EvilCorp";
 
     // Special replacement for Microsoft
@@ -252,7 +252,7 @@
         return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     }
 
-    // Main regex for all companies (improved boundaries)
+    // Main regex
     const escapedCompanyNames = companyNames.map(escapeRegExp);
     const companyRegex = new RegExp(`(?<!\\w)(${escapedCompanyNames.join('|')})(?!\\w)`, 'giu');
 
@@ -308,7 +308,6 @@
 
     // --- Execution ---
     replaceTextInNode(document.body);
-
     const observer = new MutationObserver((mutations) => {
         mutations.forEach((mutation) => {
             mutation.addedNodes.forEach((newNode) => {
