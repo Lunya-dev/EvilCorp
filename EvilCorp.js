@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name        Accurate Company Names
-// @version    	1.7
+// @version    	1.8
 // @description Replaces names of malicious corporations/organizations etc. with "EvilCorp" from Mr. Robot.
 // @author      Lunya
 // @match       *://*/*
@@ -157,6 +157,7 @@
         "Nintendo",
         "Nordic Resistance Movement",
         "NortonLifeLock",
+        "Novartis",
         "OOONA",
         "OpenAI",
         "Overwolf",
@@ -165,6 +166,9 @@
         "PayPal",
         "Pegatron",
         "Perdue Farms",
+        "Pfizer",
+        "PhRMA",
+        "Pharmaceutical Research and Manufacturers of America",
         "Philip Morris International",
         "Procter & Gamble",
         "Puma",
@@ -175,6 +179,7 @@
         "RevUp America",
         "RevUp",
         "Roblox",
+        "Roche",
         "Samsung",
         "Sega",
         "Shein",
