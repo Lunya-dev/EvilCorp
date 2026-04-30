@@ -1,6 +1,6 @@
-Disclaimer: Slop machines assisted writing this code. I'm sorry.
+Disclaimer: Ironically, slop machines assisted in writing this code. I'm sorry.
 
-Highly recommended similar project (just use this instead tbh) https://github.com/FULU-Foundation/CRW-Extension
+Highly recommended similar project (probably just use this instead) https://github.com/FULU-Foundation/CRW-Extension
 
 Sources:
 Wikipedia,
