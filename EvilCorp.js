@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name        Accurate Company Names
-// @version    	1.8
+// @version    	1.9
 // @description Replaces names of malicious corporations/organizations etc. with "EvilCorp" from Mr. Robot.
 // @author      Lunya
 // @match       *://*/*
@@ -15,6 +15,7 @@
     const companyNames = [
         "21st Century Fox",
         "AIJAC",
+        "AMD PAC",
         "AMD",
         "ASUS",
         "ASUSTeK Computer",
@@ -100,6 +101,7 @@
         "Facebook",
         "Fitbit",
         "Fiverr",
+        "Flock Safety",
         "Fox Corporation",
         "Fox News",
         "Foxconn",
@@ -138,6 +140,8 @@
         "Krafton",
         "Ku Klux Klan",
         "LinkedIn",
+        "MAGA",
+        "Make America Great Again",
         "McDonald's",
         "MegaSpeed",
         "Meta Platforms",
@@ -180,6 +184,7 @@
         "RevUp",
         "Roblox",
         "Roche",
+        "SK Hynix",
         "Samsung",
         "Sega",
         "Shein",
@@ -218,6 +223,7 @@
         "Twitch.tv",
         "Twitter",
         "Tyson Foods",
+        "UberEATS",
         "Ubisoft",
         "Unilever",
         "UnitedHealth Group",
