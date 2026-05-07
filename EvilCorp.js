@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name        Accurate Company Names
-// @version    	1.9.1
+// @version    	1.9.2
 // @description Replaces names of malicious corporations/organizations etc. with "EvilCorp" from Mr. Robot.
 // @author      Lunya
 // @match       *://*/*
@@ -14,6 +14,8 @@
     // --- Configuration ---
     const companyNames = [
         "21st Century Fox",
+        "7-Eleven",
+        "711",
         "AIJAC",
         "AMD PAC",
         "AMD",
@@ -55,8 +57,6 @@
         "Boeing",
         "British American Tobacco",
         "British Petroleum",
-        "Burger King Corporation",
-        "Burger King",
         "ByteDance",
         "CNN",
         "CVS Health",
@@ -132,6 +132,7 @@
         "HelloFresh",
         "Herstigte Nasionale Party",
         "Hewlett-Packard",
+        "Hisense",
         "Hon Hai Precision Industry",
         "HyperX",
         "Imperial Brands",
@@ -182,11 +183,13 @@
         "Patreon",
         "PayPal",
         "Pegatron",
+        "Peloton",
         "Perdue Farms",
         "Pfizer",
         "PhRMA",
         "Pharmaceutical Research and Manufacturers of America",
         "Philip Morris International",
+        "PlayStation",
         "Procter & Gamble",
         "Puma",
         "Purdue Pharma",
@@ -208,6 +211,7 @@
         "SoftKey Software Products",
         "SoftKey",
         "Sonos",
+        "Sony PlayStation",
         "Sony",
         "Starbucks",
         "Symantec Corporation",
