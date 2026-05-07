@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name        Accurate Company Names
-// @version    	1.9.2
-// @description Replaces names of malicious corporations/organizations etc. with "EvilCorp" from Mr. Robot.
+// @version    	1.9.3
+// @description Replaces names of malicious corporations/organizations etc. with "Evil Corp" from Mr. Robot.
 // @author      Lunya
 // @match       *://*/*
 // @grant       none
@@ -271,7 +271,7 @@
     ];
 
     // Default replacement
-    const replacement = "EvilCorp";
+    const replacement = "Evil Corp";
 
     // Special replacement for Microsoft
     const specialReplacement = "Microslop";
