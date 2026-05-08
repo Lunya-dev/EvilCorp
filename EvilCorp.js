@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name        Accurate Company Names
-// @version    	1.9.3
+// @version    	1.9.4
 // @description Replaces names of malicious corporations/organizations etc. with "Evil Corp" from Mr. Robot.
 // @author      Lunya
 // @match       *://*/*
@@ -19,6 +19,7 @@
         "AIJAC",
         "AMD PAC",
         "AMD",
+        "ASRock",
         "ASUS",
         "ASUSTeK Computer",
         "AT&T",
@@ -167,6 +168,7 @@
         "Nabisco",
         "Nestlé",
         "Netflix",
+        "Netgear",
         "Neurable",
         "New York Post",
         "Newsmax",
