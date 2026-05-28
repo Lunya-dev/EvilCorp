@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name        Accurate Company Names
-// @version    	1.9.5
+// @version    	1.9.6
 // @description Replaces names of malicious corporations/organizations etc. with "Evil Corp" from Mr. Robot.
 // @author      Lunya
 // @match       *://*/*
@@ -29,6 +29,7 @@
         "Activision Blizzard",
         "Activision",
         "Acxiom",
+        "Adobe",
         "Advanced Micro Devices",
         "Afrikaner Weerstandsbeweging",
         "Alliance Defending Freedom",
@@ -56,12 +57,14 @@
         "Bayerische Motoren Werke AG",
         "Beira's Place",
         "Best Buy",
+        "Bethesda",
         "BetterHelp",
         "Blizzard Entertainment",
         "Bloomberg",
         "Blue Cross Blue Shield Association",
         "Blue Shield",
         "Boeing",
+        "Bricks & Minifigs",
         "British American Tobacco",
         "British Petroleum",
         "Buick",
@@ -80,7 +83,6 @@
         "Cencora",
         "Chevrolet",
         "Chevron",
-        "Chick-fil-A",
         "Chick-fil-A",
         "China National Petroleum Corporation",
         "China National Tobacco Corporation",
