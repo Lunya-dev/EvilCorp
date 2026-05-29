@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name        Accurate Company Names
-// @version    	1.9.6
+// @version    	1.9.7
 // @description Replaces names of malicious corporations/organizations etc. with "Evil Corp" from Mr. Robot.
 // @author      Lunya
 // @match       *://*/*
@@ -231,6 +231,7 @@
         "RevUp",
         "Roblox",
         "Roche",
+        "Roku",
         "SK Hynix",
         "Samsung",
         "Sega",
@@ -282,11 +283,13 @@
         "UnitedHealth Group",
         "UnitedHealthcare",
         "VDARE",
+        "VZIO",
         "Verisk Analytics",
         "Verizon",
         "Victus",
         "VitalSource",
         "Vitol",
+        "Vizio",
         "WHOOP",
         "WaPo",
         "Walmart",
