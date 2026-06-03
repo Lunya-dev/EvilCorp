@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name        Accurate Company Names
-// @version    	1.9.7
+// @version    	1.9.8
 // @description Replaces names of malicious corporations/organizations etc. with "Evil Corp" from Mr. Robot.
 // @author      Lunya
 // @match       *://*/*
@@ -15,7 +15,7 @@
     const companyNames = [
         "21st Century Fox",
         "7-Eleven",
-        "711",
+//      "711",
         "AIJAC",
         "AMD PAC",
         "AMD",
@@ -33,9 +33,11 @@
         "Advanced Micro Devices",
         "Afrikaner Weerstandsbeweging",
         "Alliance Defending Freedom",
+        "Alphabet Inc.",
         "Amazon Elastic Compute Cloud",
         "Amazon Kindle",
         "Amazon Web Services",
+//      "Amazon",
         "Amazon.com",
         "AmerisourceBergen",
         "Amway",
@@ -44,6 +46,7 @@
         "Anthem Blue Cross",
         "Antipodean Resistance",
         "Apple Inc",
+//      "Apple",
         "Audi",
         "Australia/Israel & Jewish Affairs Council",
         "AutoPets",
@@ -106,6 +109,7 @@
         "Discord Inc",
         "Discovery Institute",
         "Disney",
+        "DomTuned",
         "Dow Chemical Company",
         "Dow Inc",
         "Dyson",
@@ -113,6 +117,7 @@
         "EC2",
         "EKWB",
         "Eagle Forum",
+        "Eaton",
         "Edvard König Water Blocks",
         "Electronic Arts",
         "Elevance Health",
@@ -174,6 +179,7 @@
         "Krafton",
         "Ku Klux Klan",
         "LG",
+        "Lenovo",
         "LinkedIn",
         "Litter Robot",
         "Litter-Robot",
@@ -270,6 +276,7 @@
         "Toyota",
         "Trade Me",
         "TradeMe",
+        "Tripp Lite",
         "Trump Media & Technology Group",
         "Truth Social",
         "TurboTax",
@@ -312,9 +319,12 @@
 
     // Default replacement
     const replacement = "Evil Corp";
-
     // Special replacement for Microsoft
     const specialReplacement = "Microslop";
+
+    // Build combined list (including Microsoft) and sort by descending length for correct matching
+    const allNames = [...companyNames, "Microsoft"];
+    allNames.sort((a, b) => b.length - a.length);
 
     /**
      * Escapes special characters for regex
@@ -323,15 +333,100 @@
         return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     }
 
-    // Main regex
-    const escapedCompanyNames = companyNames.map(escapeRegExp);
-    const companyRegex = new RegExp(`(?<!\\w)(${escapedCompanyNames.join('|')})(?!\\w)`, 'giu');
+    const escapedNames = allNames.map(escapeRegExp);
+    // Combined regex with word boundaries
+    const combinedRegex = new RegExp(`(?<!\\w)(${escapedNames.join('|')})(?!\\w)`, 'giu');
 
-    // Special regex for Microsoft → Microslop
-    const specialRegex = new RegExp(`(?<!\\w)Microsoft(?!\\w)`, 'giu');
+    // Inject CSS for the red halo effect
+    const style = document.createElement('style');
+    style.textContent = `
+        .evil-corp-replacement {
+            text-shadow: 0 0 4px rgba(255, 0, 0, 0.8), 0 0 2px rgba(255, 0, 0, 0.6);
+            transition: text-shadow 0.1s ease;
+            cursor: help;
+        }
+        .evil-corp-replacement:hover {
+            text-shadow: 0 0 6px rgba(255, 0, 0, 1), 0 0 3px rgba(255, 0, 0, 0.8);
+        }
+    `;
+    document.head.appendChild(style);
 
-    // Text replacement function
-    const replaceTextInNode = (contextNode) => {
+    /**
+     * Wraps all matched company names inside a text node with <span> elements
+     * that have a red glow and a title attribute showing the original text.
+     */
+    function wrapMatchesInNode(textNode) {
+        const parent = textNode.parentElement;
+        if (!parent) return;
+
+        const parentTag = parent.tagName.toLowerCase();
+        if (parentTag === 'script' || parentTag === 'style' || parent.isContentEditable) {
+            return;
+        }
+        // Skip if already inside a replacement span to avoid double wrapping
+        if (parent.classList && parent.classList.contains('evil-corp-replacement')) {
+            return;
+        }
+
+        const text = textNode.nodeValue;
+        if (!text.trim()) return;
+
+        // Find all matches with their indices
+        const matches = [];
+        let match;
+        combinedRegex.lastIndex = 0;
+        while ((match = combinedRegex.exec(text)) !== null) {
+            matches.push({
+                fullMatch: match[0],
+                start: match.index,
+                end: match.index + match[0].length
+            });
+        }
+
+        if (matches.length === 0) return;
+
+        // Build a document fragment with alternating text and span nodes
+        const fragment = document.createDocumentFragment();
+        let lastIndex = 0;
+
+        for (const match of matches) {
+            // Add text before the match
+            if (match.start > lastIndex) {
+                const beforeText = text.substring(lastIndex, match.start);
+                if (beforeText) {
+                    fragment.appendChild(document.createTextNode(beforeText));
+                }
+            }
+
+            // Create the replacement span
+            const span = document.createElement('span');
+            span.className = 'evil-corp-replacement';
+
+            // Determine replacement text (special for Microsoft)
+            const isMicrosoft = match.fullMatch.toLowerCase() === 'microsoft';
+            span.textContent = isMicrosoft ? specialReplacement : replacement;
+            span.title = match.fullMatch; // show original on hover
+
+            fragment.appendChild(span);
+            lastIndex = match.end;
+        }
+
+        // Add any remaining text after the last match
+        if (lastIndex < text.length) {
+            const afterText = text.substring(lastIndex);
+            if (afterText) {
+                fragment.appendChild(document.createTextNode(afterText));
+            }
+        }
+
+        // Replace the original text node with our new fragment
+        textNode.parentNode.replaceChild(fragment, textNode);
+    }
+
+    /**
+     * Processes all eligible text nodes within the given context element.
+     */
+    function replaceTextInNode(contextNode) {
         if (!contextNode || contextNode.nodeType !== Node.ELEMENT_NODE) return;
 
         const walker = document.createTreeWalker(
@@ -347,38 +442,12 @@
             textNodes.push(node);
         }
 
-        textNodes.forEach(node => {
-            const parent = node.parentElement;
-            if (parent) {
-                const parentTag = parent.tagName.toLowerCase();
-                if (parentTag === 'script' || parentTag === 'style' || parent.isContentEditable) {
-                    return;
-                }
-            }
+        textNodes.forEach(wrapMatchesInNode);
+    }
 
-            let text = node.nodeValue;
-            const originalText = text;
-
-            // 1. Apply special Microsoft replacement first
-            if (specialRegex.test(text)) {
-                specialRegex.lastIndex = 0;
-                text = text.replace(specialRegex, specialReplacement);
-            }
-
-            // 2. Apply general company replacement
-            if (companyRegex.test(text)) {
-                companyRegex.lastIndex = 0;
-                text = text.replace(companyRegex, replacement);
-            }
-
-            if (originalText !== text) {
-                node.nodeValue = text;
-            }
-        });
-    };
-
-    // --- Execution ---
+    // --- Initial execution and observer ---
     replaceTextInNode(document.body);
+
     const observer = new MutationObserver((mutations) => {
         mutations.forEach((mutation) => {
             mutation.addedNodes.forEach((newNode) => {
@@ -393,5 +462,4 @@
         childList: true,
         subtree: true
     });
-
 })();
